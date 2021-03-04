@@ -10,8 +10,9 @@ public:
     enum Roles {
         Id = Qt::UserRole + 1,
         Name,
-        Calories,
-        Price,
+        Title,
+        Author,
+        Text,
         Date,
         Color,
     };

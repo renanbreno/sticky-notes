@@ -22,7 +22,7 @@ public:
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     QHash<int, QByteArray> roleNames() const;
-    Q_INVOKABLE void addFruta();
+    Q_INVOKABLE void addNote();
     static void registerTypes();
 
 public slots:

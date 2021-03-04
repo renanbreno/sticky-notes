@@ -1,5 +1,5 @@
-#ifndef FRUTA_H
-#define FRUTA_H
+#ifndef NOTA_H
+#define NOTA_H
 #include <QString>
 
 class Nota
@@ -14,4 +14,4 @@ public:
     QString color;
 };
 
-#endif // FRUTA_H
+#endif // NOTA_H

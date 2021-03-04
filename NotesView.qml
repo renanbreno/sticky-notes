@@ -6,143 +6,91 @@ import QtQuick.Layouts 1.3
 
 import Models 1.0
 
-ListView {
+Flickable {
     signal addButtonPressed(var note)
     signal removeButtonPressed(var note)
     signal updateButtonPressed(var note)
+    property alias model: repeater.model
+
     clip: true
-    spacing: 8
-    delegate: Card {
-        width: parent.width
-        height: 64
-        color: model.color
+    contentHeight: column.implicitHeight + 32
+    ColumnLayout {
+        anchors.fill: parent
+        id: column
         GridLayout {
-            columnSpacing: 8
-            columns: 6
-            anchors.fill: parent
-            anchors.margins: 8
-            Item {
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Text {
-                    text: "Título"
-                    anchors.fill: parent
-                }
-            }
+            rowSpacing: 16
+            columnSpacing: 16
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            columns: parent.width / 200
+            Repeater {
+                id: repeater
+                Card {
+                    height: 150
+                    Layout.fillWidth: true
+                    color: model.color
 
-            Item {
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Text {
-                    text: "Autor"
-                    anchors.fill: parent
-                }
-            }
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            const note = { id: model.id,
+                                title: model.title,
+                                author: model.author,
+                                text: model.text, date:
+                                model.date,
+                                color: model.color }
 
-            Item {
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Text {
-                    text: "Texto"
-                    anchors.fill: parent
-                }
-            }
-
-            Item {
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Text {
-                    text: "Data"
-                    anchors.fill: parent
-                }
-            }
-
-            Button {
-                Layout.rowSpan: 2
-
-                Image {
-                    anchors.fill: parent
-                    fillMode: Image.PreserveAspectFit
-                    anchors.margins: 16
-                    source: "qrc:/icons/editar.png"
-                }
-
-                onPressed: {
-                    const note = {
-                        title: model.title,
-                        text: model.text,
-                        author: model.author,
-                        date: model.date,
-                        color: model.color,
-                        index: index,
-                        id: model.id
+                            updateButtonPressed(note)
+                        }
                     }
-                    updateButtonPressed(note)
-                }
-            }
 
-            Button {
-                Layout.rowSpan: 2
+                    ColumnLayout {
+                        anchors.fill: parent
+                        anchors.margins: 8
+                        Item {
+                            Layout.fillHeight: true
+                            Layout.fillWidth: true
+                            Text {
+                                font.pixelSize: 16
+                                elide: Text.ElideRight
+                                text: "Título: " + model.title
+                                anchors.fill: parent
+                            }
+                        }
 
-                Image {
-                    anchors.fill: parent
-                    fillMode: Image.PreserveAspectFit
-                    anchors.margins: 16
-                    source: "qrc:/icons/remover.png"
-                }
+                        Item {
+                            Layout.fillHeight: true
+                            Layout.fillWidth: true
+                            Text {
+                                font.pixelSize: 16
+                                elide: Text.ElideRight
+                                text: "Autor: " + model.author
+                                anchors.fill: parent
+                            }
+                        }
 
-                onPressed: {
-                    const note = {
-                        title: model.title,
-                        index: index,
-                        id: model.id
+                        Item {
+                            Layout.fillHeight: true
+                            Layout.fillWidth: true
+                            Text {
+                                font.pixelSize: 16
+                                elide: Text.ElideRight
+                                text: "Texto: " + model.text
+                                anchors.fill: parent
+                            }
+                        }
+
+                        Item {
+                            Layout.fillHeight: true
+                            Layout.fillWidth: true
+                            Text {
+                                font.pixelSize: 16
+                                elide: Text.ElideRight
+                                text: "Data: " + model.date
+                                anchors.fill: parent
+                            }
+                        }
                     }
-                    removeButtonPressed(note)
-                }
-            }
-
-            Item {
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Text {
-                    text: model.title
-                    anchors.fill: parent
-                    font.pixelSize: 14
-                    elide: Text.ElideRight
-                }
-            }
-
-
-            Item {
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Text {
-                    text: model.author
-                    anchors.fill: parent
-                    font.pixelSize: 14
-                    elide: Text.ElideRight
-                }
-            }
-
-            Item {
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Text {
-                    text: model.text
-                    anchors.fill: parent
-                    font.pixelSize: 14
-                    elide: Text.ElideRight
-                }
-            }
-
-            Item {
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Text {
-                    text: model.date
-                    anchors.fill: parent
-                    font.pixelSize: 14
-                    elide: Text.ElideRight
                 }
             }
         }

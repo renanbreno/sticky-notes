@@ -49,7 +49,7 @@ QHash<int, QByteArray> NotesListModel::roleNames() const
     return roles;
 }
 
-void NotesListModel::addFruta()
+void NotesListModel::addNote()
 {
     beginResetModel();
     m_notas.clear();
@@ -75,6 +75,6 @@ void NotesListModel::removeNotes(int index)
 }
 
 void registerListModelTypes() {
-    qmlRegisterType<NotesListModel>("Models", 1, 0, "FrutaListModel");
+    qmlRegisterType<NotesListModel>("Models", 1, 0, "NotesListModel");
 }
 Q_COREAPP_STARTUP_FUNCTION(registerListModelTypes)

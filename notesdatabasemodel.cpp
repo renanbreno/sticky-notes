@@ -18,9 +18,9 @@ NotesDatabaseModel::NotesDatabaseModel(QObject *parent, Database *database) : QS
 void NotesDatabaseModel::configureRoles()
 {
     registerRoleColumn(Id, "id");
-    registerRoleColumn(Name, "title");
-    registerRoleColumn(Price, "author");
-    registerRoleColumn(Calories, "text");
+    registerRoleColumn(Title, "title");
+    registerRoleColumn(Author, "author");
+    registerRoleColumn(Text, "text");
     registerRoleColumn(Date, "date");
     registerRoleColumn(Color, "color");
 }
@@ -90,6 +90,6 @@ void NotesDatabaseModel::deleteRow(QString id)
 }
 
 void registerTypes() {
-    qmlRegisterType<NotesDatabaseModel>("Models", 1, 0, "FrutaDatabaseModel");
+    qmlRegisterType<NotesDatabaseModel>("Models", 1, 0, "NotesDatabaseModel");
 }
 Q_COREAPP_STARTUP_FUNCTION(registerTypes)

@@ -35,7 +35,6 @@ Window {
 
     AddNotaDialog {
         id: updateNoteDialog
-        title: "Editar Nota"
         onCancelPressed: {
             updateNoteDialog.close()
         }
@@ -45,81 +44,79 @@ Window {
         }
     }
 
-    FrutaDatabaseModel {
+    NotesDatabaseModel {
         id: dbNotes
     }
 
     ColumnLayout {
-        anchors.fill: parent
-
-        RowLayout {
-            Layout.fillWidth: true
-            Text {
-                text: `Notas do ${myModel.name}`
+        anchors {
+            fill: parent
+            margins: 16
+        }
+            RowLayout {
                 Layout.fillWidth: true
-                font.pixelSize: 20
-            }
-            TextField {
-                id: nameField
-            }
-            Button {
-                text: "Salvar"
-                enabled: nameField != ""
-                onPressed: {
-                    if(nameField != "") {
-                        myModel.setName(nameField.text, myModel.id)
+                Text {
+
+                    text: `Notas do ${myModel.name}`
+                    wrapMode: Text.Wrap
+                    Layout.fillWidth: true
+                    font.pixelSize: 20
+                }
+                TextField {
+                    id: nameField
+                }
+                Button {
+                    text: "Salvar"
+                    enabled: nameField != ""
+                    onPressed: {
+                        if(nameField !== "") {
+                            myModel.setName(nameField.text, myModel.id)
+                        }
+                        nameField.clear()
                     }
-                    nameField.clear()
                 }
             }
-        }
 
-        RowLayout {
-            Text {
-                text: "Notas"
-                Layout.fillWidth: true
-                font.pixelSize: 20
+            RowLayout {
+                Text {
+                    text: "Notas"
+                    Layout.fillWidth: true
+                    font.pixelSize: 20
+                }
+                Button {
+
+                    Image {
+                        anchors.fill: parent
+                        fillMode: Image.PreserveAspectFit
+                        anchors.margins: 16
+                        source: "qrc:/icons/adicionar.png"
+                    }
+
+                    onPressed: {
+                        addNotaDialog.open()
+                    }
+                }
             }
-            Button {
 
-                Image {
+
+            Item {
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                NotesView {
                     anchors.fill: parent
-                    fillMode: Image.PreserveAspectFit
-                    anchors.margins: 16
-                    source: "qrc:/icons/adicionar.png"
-                }
+                    model: dbNotes
 
-                onPressed: {
-                    addNotaDialog.open()
-                }
-            }
-        }
-
-        NotesView {
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            model: dbNotes
-            onAddButtonPressed: {
-                note.quantidade = 1
-                for(let i = 0; i < notas.rowCount(); i++) {
-                    if(notas.get(i).id == note.id) {
-                        notas.get(i).quantidade += 1
-                        totalText.text = "Total: " + notas.getTotal()
-                        return
+                    onUpdateButtonPressed: {
+                        updateNoteDialog.setFields(note)
+                        updateNoteDialog.open()
+                    }
+                    onRemoveButtonPressed: {
+                        removeNoteDialog.note = note
+                        removeNoteDialog.open()
                     }
                 }
-                notas.append(note)
-
-                totalText.text = "Total: " + notas.getTotal()
-            }
-            onUpdateButtonPressed: {
-                updateNoteDialog.setFields(note)
-                updateNoteDialog.open()
-            }
-            onRemoveButtonPressed: {
-                removeNoteDialog.note = note
-                removeNoteDialog.open()
             }
         }
     }
-}
+
+
