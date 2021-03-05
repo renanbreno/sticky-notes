@@ -11,7 +11,7 @@ Dialog {
     property var cor
     property var note
 
-    width: parent.width - 150
+    width: Math.min(450, Math.max(parent.width - 16, 150))
     height: parent.height - 300
 
     x: parent.width/2 - addNotaDialog.width/2
@@ -40,79 +40,86 @@ Dialog {
         border.width: 2
         radius: 6
         ColumnLayout {
-            anchors {
-                left: parent.left
-                right: parent.right
-                margins: 12
-            }
+            anchors.fill: parent
+            Flickable {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                clip: true
+                contentHeight: columnItems.implicitHeight + 32
+                ColumnLayout {
+                    id: columnItems
+                    anchors {
+                        top: parent.top
+                        left: parent.left
+                        right: parent.right
+                        margins: 12
+                    }
+                    GridLayout {
+                        Layout.alignment: Qt.AlignCenter
+                        ButtonGroup { id: buttonGroup }
+                        columns: 6
+                        Repeater {
+                            model: [
+                                { name: "Azul", color: "#ABDEE6" },
+                                { name: "Roxo", color: "#CBAACB" },
+                                { name: "Amarelo", color: "#FFFFB5" },
+                                { name: "Rosa", color: "#FFCCB6" },
+                                { name: "Rosa claro", color: "#F3B0C3" },
+                                { name: "Azul Claro", color: "#C6DBDA" },
+                            ]
 
-            id: columnItems
-            TextField {
-                id: titleField
-                Layout.fillWidth: true
-                placeholderText: "Título"
-            }
-            TextArea {
-                id: authorField
-                Layout.fillWidth: true
-                placeholderText: "Autor"
-            }
-            TextArea {
-                id: textField
-                Layout.fillWidth: true
-                background: Rectangle { color: "black"; opacity: 0.2 }
-                placeholderText: "Texto"
-                wrapMode: "WrapAtWordBoundaryOrAnywhere"
-            }
-            TextField {
-                id: dateField
-                Layout.fillWidth: true
-                text: new Date().toLocaleDateString(Qt.LocaleDate)
-            }
+                            RadioButton {
+                                background: Rectangle {
+                                    id: rec
+                                    height: 32
+                                    width: height
+                                    radius: height
+                                    color: modelData.color
+                                    border.width: 2
+                                }
 
-            GridLayout {
-                Layout.alignment: Qt.AlignCenter
-                ButtonGroup { id: buttonGroup }
-                columns: 3
-                Repeater {
-                    model: [
-                        { name: "Azul", color: "#ABDEE6" },
-                        { name: "Roxo", color: "#CBAACB" },
-                        { name: "Amarelo", color: "#FFFFB5" },
-                        { name: "Rosa", color: "#FFCCB6" },
-                        { name: "Rosa claro", color: "#F3B0C3" },
-                        { name: "Azul Claro", color: "#C6DBDA" },
-                    ]
+                                indicator: Rectangle {
+                                    id: recInd
+                                    height: 12
+                                    width: height
+                                    radius: height
+                                    color: parent.checked ? "black" : modelData.color
+                                    anchors.centerIn: rec
+                                }
 
-                    RadioButton {
-                        background: Rectangle {
-                            id: rec
-                            height: 32
-                            width: height
-                            radius: height
-                            color: modelData.color
-                            border.width: 2
+                                id: colorField
+                                checked: modelData.color == cor
+                                ButtonGroup.group: buttonGroup
+                                onClicked: {
+                                    cor = modelData.color
+                                }
+                            }
                         }
-
-                        indicator: Rectangle {
-                            id: recInd
-                            height: 12
-                            width: height
-                            radius: height
-                            color: parent.checked ? "black" : modelData.color
-                            anchors.centerIn: rec
-                        }
-
-                        id: colorField
-                        checked: modelData.color == cor
-                        ButtonGroup.group: buttonGroup
-                        onClicked: {
-                            cor = modelData.color
-                        }
+                    }
+                    TextField {
+                        id: titleField
+                        Layout.fillWidth: true
+                        placeholderText: "Título"
+                    }
+                    TextField {
+                        id: authorField
+                        Layout.fillWidth: true
+                        placeholderText: "Autor"
+                    }
+                    TextField {
+                        id: dateField
+                        Layout.fillWidth: true
+                        text: new Date().toLocaleDateString(Qt.LocaleDate)
+                    }
+                    TextArea {
+                        id: textField
+                        Layout.fillWidth: true
+                        background: Rectangle { color: "black"; opacity: 0.2 }
+                        placeholderText: "Texto"
+                        wrapMode: "WrapAtWordBoundaryOrAnywhere"
                     }
                 }
             }
-
             RowLayout {
                 Layout.alignment: Qt.AlignCenter
                 spacing: 6

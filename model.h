@@ -11,23 +11,22 @@ public:
 
     Q_PROPERTY(QString name READ name NOTIFY nameChanged)
     Q_PROPERTY(QString id READ id)
-    Q_PROPERTY(QString value READ value NOTIFY valueChanged)
-    Q_PROPERTY(QString key READ key)
+    Q_PROPERTY(QString viewState READ viewState NOTIFY viewStateChanged);
     QString name();
     QString id();
-    QString value();
-    QString key();
+    QString viewState();
     Q_INVOKABLE void setName(QString name);
-    Q_INVOKABLE void setValue(QString value);
+    Q_INVOKABLE void toggleViewState();
 
 signals:
     void nameChanged(QString name);
-    void valueChanged(QString value);
+    void viewStateChanged();
 private:
+    bool setValue(QString key, QString value);
+    QString getValue(QString key, QString defaultValue = "");
     QString m_name;
     QString m_id;
-    QString m_value;
-    QString m_key;
+    QString m_viewState;
     Database *m_database;
 };
 

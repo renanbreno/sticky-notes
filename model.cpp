@@ -47,42 +47,42 @@ void Model::setName(QString name)
     }
 }
 
-QString Model::value()
+QString Model::viewState()
 {
-    if(m_value == "" || m_value.isNull()) {
-        QSqlQuery query(m_database->database());
-        query.prepare("SELECT * FROM settings");
-        if(query.exec() && query.first()) {
-            m_value = query.value("value").toString();
-        }
+    if (m_viewState == "") {
+        return getValue("tipoView", "grid");
+    } else {
+        return m_viewState;
     }
-    return m_value;
 }
 
-QString Model::key()
+void Model::toggleViewState()
 {
-    if(m_key == "" || m_key.isNull()) {
-        QSqlQuery query(m_database->database());
-        query.prepare("SELECT * FROM settings");
-        if(query.exec() && query.first()) {
-            m_key = query.value("key").toString();
-        }
+    if (viewState() == "grid") {
+        setValue("tipoView", "list");
+    } else {
+        setValue("tipoView", "grid");
     }
-    return m_key;
+    emit viewStateChanged();
 }
 
-void Model::setValue(QString value)
+bool Model::setValue(QString key, QString value)
 {
-    QString key = "settings";
-    if(m_value != value) {
         QSqlQuery query(m_database->database());
         query.prepare("INSERT OR REPLACE INTO settings (key, value) VALUES (:key, :value)");
         query.bindValue(":key", key);
         query.bindValue(":value", value);
+        return query.exec();
+}
 
-        if (query.exec()) {
-            m_value = value;
-            emit valueChanged(m_value);
+QString Model::getValue(QString key, QString defaultValue)
+{
+        QString value = defaultValue;
+        QSqlQuery query(m_database->database());
+        query.prepare("SELECT value FROM settings where key = :key");
+        query.bindValue(":key", key);
+        if(query.exec() && query.first()) {
+            value = query.value("value").toString();
         }
-    }
+    return value;
 }

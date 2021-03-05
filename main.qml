@@ -56,16 +56,72 @@ ApplicationWindow {
                 leftMargin: 16
             }
             ToolButton {
-                text: "Keep dev.academy"
-            }
-            Item { Layout.fillWidth: true; }
-            Button {
-                Material.background: Material.LightBlue
-                text: "Mudar visualização"
-                onPressed: {
-                    myModel.setValue(myModel.key)
+                text: ' ⋮ '
+                font.pixelSize: 26
+                onClicked: {
+                    menu.open()
                 }
             }
+
+            Item { Layout.fillWidth: true; }
+            Label {
+                text: "Keep dev.academy"
+            }
+
+//            Button {
+//                Material.background: "#4CAF50"
+//                Image {
+//                    anchors.fill: parent
+//                    fillMode: Image.PreserveAspectFit
+//                    anchors.margins: 16
+//                    source: "qrc:/icons/adicionar.png"
+//                }
+//                onPressed: {
+//                    addNotaDialog.open()
+//                }
+//            }
+//            Button {
+//                Image {
+//                    anchors.fill: parent
+//                    fillMode: Image.PreserveAspectFit
+//                    anchors.margins: 16
+//                    source: myModel.viewState == "list" ? "qrc:/icons/grid.png" : "qrc:/icons/list.png"
+//                }
+//                onPressed: {
+//                    myModel.toggleViewState()
+//                }
+//            }
+        }
+    }
+
+    StackView {
+        id: stack
+        anchors.fill: parent
+    }
+
+    Menu {
+        id: menu
+        MenuItem {
+            Image {
+                anchors.fill: parent
+                horizontalAlignment: Image.AlignRight
+                fillMode: Image.PreserveAspectFit
+                anchors.margins: 16
+                source: myModel.viewState == "list" ? "qrc:/icons/grid.png" : "qrc:/icons/list.png"
+            }
+            text: myModel.viewState == "list" ? "Grade" : "Lista"
+            onPressed: {
+                myModel.toggleViewState()
+            }
+        }
+        MenuItem {
+            text: "Adicionar nova nota"
+            onPressed: {
+                addNotaDialog.open()
+            }
+        }
+        MenuItem {
+            text: "Modo Escuro"
         }
     }
 
@@ -90,25 +146,6 @@ ApplicationWindow {
                         myModel.setName(nameField.text, myModel.id)
                     }
                     nameField.clear()
-                }
-            }
-        }
-
-        RowLayout {
-            Text {
-                text: "Notas"
-                Layout.fillWidth: true
-                font.pixelSize: 20
-            }
-            Button {
-                Image {
-                    anchors.fill: parent
-                    fillMode: Image.PreserveAspectFit
-                    anchors.margins: 16
-                    source: "qrc:/icons/adicionar.png"
-                }
-                onPressed: {
-                    addNotaDialog.open()
                 }
             }
         }
