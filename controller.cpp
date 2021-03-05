@@ -14,5 +14,12 @@ void Controller::setModel(Model *model)
 void Controller::mudarNome(QString nome)
 {
     qDebug() << "Mudar Nome (controller)" << nome;
-//    m_model->setName(nome);
+}
+
+void Controller::setValue(Model *model) {
+    m_model = model;
+}
+
+void Controller::mudarValue(QString value) {
+    qDebug() << "Mudar Value (Controller)" << value;
 }

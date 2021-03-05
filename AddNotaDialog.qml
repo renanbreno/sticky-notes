@@ -92,6 +92,7 @@ Dialog {
                             color: modelData.color
                             border.width: 2
                         }
+
                         indicator: Rectangle {
                             id: recInd
                             height: 12

@@ -11,7 +11,9 @@ Q_OBJECT
 public:
     explicit Controller(QObject *parent = nullptr);
     void setModel(Model *model);
+    void setValue(Model *model);
     Q_INVOKABLE void mudarNome(QString nome);
+    Q_INVOKABLE void mudarValue(QString value);
 private:
     Model *m_model;
 };

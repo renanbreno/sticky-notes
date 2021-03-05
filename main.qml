@@ -6,7 +6,7 @@ import QtQuick.Layouts 1.3
 
 import Models 1.0
 
-Window {
+ApplicationWindow {
     width: 1024
     height: 780
     visible: true
@@ -48,75 +48,94 @@ Window {
         id: dbNotes
     }
 
-    ColumnLayout {
-        anchors {
-            fill: parent
-            margins: 16
-        }
-            RowLayout {
-                Layout.fillWidth: true
-                Text {
-
-                    text: `Notas do ${myModel.name}`
-                    wrapMode: Text.Wrap
-                    Layout.fillWidth: true
-                    font.pixelSize: 20
-                }
-                TextField {
-                    id: nameField
-                }
-                Button {
-                    text: "Salvar"
-                    enabled: nameField != ""
-                    onPressed: {
-                        if(nameField !== "") {
-                            myModel.setName(nameField.text, myModel.id)
-                        }
-                        nameField.clear()
-                    }
-                }
+    header: ToolBar {
+        RowLayout {
+            anchors {
+                fill: parent
+                rightMargin: 16
+                leftMargin: 16
             }
-
-            RowLayout {
-                Text {
-                    text: "Notas"
-                    Layout.fillWidth: true
-                    font.pixelSize: 20
-                }
-                Button {
-
-                    Image {
-                        anchors.fill: parent
-                        fillMode: Image.PreserveAspectFit
-                        anchors.margins: 16
-                        source: "qrc:/icons/adicionar.png"
-                    }
-
-                    onPressed: {
-                        addNotaDialog.open()
-                    }
-                }
+            ToolButton {
+                text: "Keep dev.academy"
             }
-
-
-            Item {
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                NotesView {
-                    anchors.fill: parent
-                    model: dbNotes
-
-                    onUpdateButtonPressed: {
-                        updateNoteDialog.setFields(note)
-                        updateNoteDialog.open()
-                    }
-                    onRemoveButtonPressed: {
-                        removeNoteDialog.note = note
-                        removeNoteDialog.open()
-                    }
+            Item { Layout.fillWidth: true; }
+            Button {
+                Material.background: Material.LightBlue
+                text: "Mudar visualização"
+                onPressed: {
+                    print("clicou")
                 }
             }
         }
     }
+
+    StackView {
+        id: stack
+        anchors.fill: parent
+    }
+
+    ColumnLayout {
+        anchors { fill: parent; margins: 16 }
+        RowLayout {
+            Layout.fillWidth: true
+            Text {
+                text: `Notas do ${myModel.name}`
+                wrapMode: Text.Wrap
+                Layout.fillWidth: true
+                font.pixelSize: 18
+            }
+            TextField {
+                id: nameField
+            }
+            Button {
+                text: "Salvar"
+                enabled: nameField != ""
+                onPressed: {
+                    if(nameField !== "") {
+                        myModel.setName(nameField.text, myModel.id)
+                    }
+                    nameField.clear()
+                }
+            }
+        }
+
+        RowLayout {
+            Text {
+                text: "Notas"
+                Layout.fillWidth: true
+                font.pixelSize: 20
+            }
+            Button {
+                Image {
+                    anchors.fill: parent
+                    fillMode: Image.PreserveAspectFit
+                    anchors.margins: 16
+                    source: "qrc:/icons/adicionar.png"
+                }
+                onPressed: {
+                    addNotaDialog.open()
+                }
+            }
+        }
+
+        Item {
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            NotesView {
+                anchors.fill: parent
+                model: dbNotes
+
+                onUpdateButtonPressed: {
+                    updateNoteDialog.setFields(note)
+                    updateNoteDialog.open()
+                }
+                onRemoveButtonPressed: {
+                    removeNoteDialog.note = note
+                    removeNoteDialog.open()
+                }
+            }
+        }
+    }
+}
 
 

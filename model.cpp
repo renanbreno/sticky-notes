@@ -46,3 +46,43 @@ void Model::setName(QString name)
         }
     }
 }
+
+QString Model::value()
+{
+    if(m_value == "" || m_value.isNull()) {
+        QSqlQuery query(m_database->database());
+        query.prepare("SELECT * FROM settings");
+        if(query.exec() && query.first()) {
+            m_value = query.value("value").toString();
+        }
+    }
+    return m_value;
+}
+
+QString Model::key()
+{
+    if(m_key == "" || m_key.isNull()) {
+        QSqlQuery query(m_database->database());
+        query.prepare("SELECT * FROM settings");
+        if(query.exec() && query.first()) {
+            m_key = query.value("key").toString();
+        }
+    }
+    return m_key;
+}
+
+void Model::setValue(QString value)
+{
+    QString key = "settings";
+    if(m_value != value) {
+        QSqlQuery query(m_database->database());
+        query.prepare("INSERT OR REPLACE INTO settings (key, value) VALUES (:key, :value)");
+        query.bindValue(":key", key);
+        query.bindValue(":value", value);
+
+        if (query.exec()) {
+            m_value = value;
+            emit valueChanged(m_value);
+        }
+    }
+}
