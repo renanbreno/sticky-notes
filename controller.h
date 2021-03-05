@@ -13,7 +13,7 @@ public:
     void setModel(Model *model);
     void setValue(Model *model);
     Q_INVOKABLE void mudarNome(QString nome);
-    Q_INVOKABLE void mudarValue(QString value);
+    Q_INVOKABLE void mudarValue(QString valor);
 private:
     Model *m_model;
 };

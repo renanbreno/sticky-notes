@@ -20,6 +20,6 @@ void Controller::setValue(Model *model) {
     m_model = model;
 }
 
-void Controller::mudarValue(QString value) {
-    qDebug() << "Mudar Value (Controller)" << value;
+void Controller::mudarValue(QString valor) {
+    qDebug() << "Mudar Value (Controller)" << valor;
 }

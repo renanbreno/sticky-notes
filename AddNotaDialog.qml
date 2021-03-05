@@ -11,8 +11,9 @@ Dialog {
     property var cor
     property var note
 
-    width: parent.width - 100
-    height: parent.height - 350
+    width: parent.width - 150
+    height: parent.height - 300
+
     x: parent.width/2 - addNotaDialog.width/2
     y: parent.height/2 - addNotaDialog.height/2
 

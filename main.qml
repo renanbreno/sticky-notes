@@ -63,15 +63,10 @@ ApplicationWindow {
                 Material.background: Material.LightBlue
                 text: "Mudar visualização"
                 onPressed: {
-                    print("clicou")
+                    myModel.setValue(myModel.key)
                 }
             }
         }
-    }
-
-    StackView {
-        id: stack
-        anchors.fill: parent
     }
 
     ColumnLayout {
