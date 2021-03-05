@@ -14,6 +14,7 @@ Flickable {
     property var selectedCards: []
     property alias model: repeater.model
     property var isGrid: myModel.viewState == "grid"
+    property var list: column
 
     clip: true
     contentHeight: column.implicitHeight + 32
@@ -73,7 +74,7 @@ Flickable {
                             Layout.fillWidth: true
                             Text {
                                 id: titleText
-                                font { pixelSize: 18; weight: Font.bold }
+                                font { pixelSize: 20; weight: Font.bold }
                                 elide: Text.ElideRight
                                 text: model.title
                                 anchors.fill: parent
@@ -85,7 +86,7 @@ Flickable {
                             Layout.fillWidth: true
                             Text {
                                 id: authorText
-                                font.pixelSize: 16
+                                font.pixelSize: 18
                                 elide: Text.ElideRight
                                 text: model.author
                                 anchors.fill: parent
@@ -95,8 +96,9 @@ Flickable {
                         Item {
                             Layout.fillHeight: true
                             Layout.fillWidth: true
+                            Layout.alignment: Qt.AlignVCenter
                             Text {
-                                font.pixelSize: 12
+                                font.pixelSize: 14
                                 elide: Text.ElideRight
                                 text: model.text
                                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere
@@ -111,7 +113,7 @@ Flickable {
                                 id: dateText
                                 color: "#898989"
                                 horizontalAlignment: Text.AlignRight
-                                font.pixelSize: 8
+                                font.pixelSize: 12
                                 elide: Text.ElideRight
                                 text: model.date
                                 anchors.fill: parent
