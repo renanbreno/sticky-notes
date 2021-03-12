@@ -7,7 +7,6 @@
         <file>AddNotaDialog.qml</file>
         <file>NotesView.qml</file>
         <file>icons/adicionar.png</file>
-        <file>icons/editar.png</file>
         <file>icons/remover.png</file>
         <file>icons/grid.png</file>
         <file>icons/list.png</file>

@@ -11,6 +11,7 @@ Flickable {
     signal addButtonPressed(var note)
     signal removeButtonPressed(var note)
     signal updateButtonPressed(var note)
+    signal removeSelecteds(var checked)
     property var selectedCards: []
     property alias model: repeater.model
     property var isGrid: myModel.viewState == "grid"
@@ -24,6 +25,21 @@ Flickable {
         id: column
         Text {
             text: "SELECIONADOS: " + (selectedCards.length)
+        }
+
+        RowLayout {
+            Button {
+                id: remove
+                enabled: selectedCards.length >= 1
+                text: "Remover seleção"
+                onPressed: {
+                    console.log("marcados", selectedCards)
+                    for (let i = 0; i < selectedCards.length; i++) {
+                        selectedCards.splice(i)
+                        console.log("desmarcou todos", selectedCards)
+                    }
+                }
+            }
         }
 
         GridLayout {
@@ -46,13 +62,16 @@ Flickable {
                     Layout.fillWidth: true
                     color: model.color
 
+
+
                     MouseArea {
                         id: mousearea
                         hoverEnabled: true
 
                         anchors.fill: parent
                         onClicked: {
-                            const note = { id: model.id,
+                            const note = {
+                                id: model.id,
                                 title: model.title,
                                 author: model.author,
                                 text: model.text, date:
@@ -120,10 +139,9 @@ Flickable {
                             }
                         }
                     }
+
                     CheckBox {
                         id: buttonCard
-                        height: 32
-                        width: height
                         visible: mousearea.containsMouse || buttonCard.hovered || card.checked
                         anchors {
                             top: parent.top
@@ -132,8 +150,12 @@ Flickable {
                         onPressed: {
                             if (checked) {
                                 selectedCards.splice(selectedCards.indexOf(index), 1)
+                                print("desmarcou")
+                                print(selectedCards)
                             } else {
                                 selectedCards.push(index)
+                                print("marcou")
+                                print(selectedCards)
                             }
                                 selectedCardsChanged()
                         }

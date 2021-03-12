@@ -64,33 +64,17 @@ ApplicationWindow {
             }
 
             Item { Layout.fillWidth: true; }
-            Label {
-                text: "Keep dev.academy"
+
+            TextField {
+                placeholderText: qsTr("Buscar uma nota")
+                id: searchNotes
             }
 
-//            Button {
-//                Material.background: "#4CAF50"
-//                Image {
-//                    anchors.fill: parent
-//                    fillMode: Image.PreserveAspectFit
-//                    anchors.margins: 16
-//                    source: "qrc:/icons/adicionar.png"
-//                }
-//                onPressed: {
-//                    addNotaDialog.open()
-//                }
-//            }
-//            Button {
-//                Image {
-//                    anchors.fill: parent
-//                    fillMode: Image.PreserveAspectFit
-//                    anchors.margins: 16
-//                    source: myModel.viewState == "list" ? "qrc:/icons/grid.png" : "qrc:/icons/list.png"
-//                }
-//                onPressed: {
-//                    myModel.toggleViewState()
-//                }
-//            }
+            Item { Layout.fillWidth: true; }
+            Label {
+                text: "Keep dev.academy"
+                elide: "ElideRight"
+            }
         }
     }
 
@@ -115,7 +99,14 @@ ApplicationWindow {
             }
         }
         MenuItem {
-            text: "Adicionar nova nota"
+            Image {
+                anchors.fill: parent
+                horizontalAlignment: Image.AlignRight
+                fillMode: Image.PreserveAspectFit
+                anchors.margins: 12
+                source: "qrc:/icons/adicionar.png"
+            }
+            text: "Adicionar nota"
             onPressed: {
                 addNotaDialog.open()
             }
