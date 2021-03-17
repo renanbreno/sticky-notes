@@ -25,6 +25,7 @@ public:
     Q_INVOKABLE void newRow(QString title, QString author, QString text, QString date, QString color);
     Q_INVOKABLE void updateRow(QString id, QString title, QString author, QString text, QString date, QString color);
     Q_INVOKABLE void deleteRow(QString id);
+    Q_INVOKABLE void setFilter(QString text);
 
     Q_INVOKABLE QHash<int, QByteArray> roleNames() const;
 

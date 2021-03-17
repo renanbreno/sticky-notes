@@ -89,6 +89,11 @@ void NotesDatabaseModel::deleteRow(QString id)
     select();
 }
 
+void NotesDatabaseModel::setFilter(QString text)
+{
+    QSqlTableModel::setFilter(text);
+}
+
 void registerTypes() {
     qmlRegisterType<NotesDatabaseModel>("Models", 1, 0, "NotesDatabaseModel");
 }

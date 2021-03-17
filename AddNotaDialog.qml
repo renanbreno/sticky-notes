@@ -57,7 +57,7 @@ Dialog {
                     GridLayout {
                         Layout.alignment: Qt.AlignCenter
                         ButtonGroup { id: buttonGroup }
-                        columns: 6
+                        columns: 10
                         Repeater {
                             model: [
                                 { name: "Azul", color: "#ABDEE6" },
@@ -66,6 +66,7 @@ Dialog {
                                 { name: "Rosa", color: "#FFCCB6" },
                                 { name: "Rosa claro", color: "#F3B0C3" },
                                 { name: "Azul Claro", color: "#C6DBDA" },
+                                { name: "Cor Padrão", color: "white"}
                             ]
 
                             RadioButton {
@@ -139,8 +140,7 @@ Dialog {
                     enabled: (!titleField.text == ""
                               && !authorField.text == ""
                               && !textField.text == ""
-                              && !dateField.text == ""
-                              && cor)
+                              && !dateField.text == "")
 
                     onPressed: {
                         okPressed(noteId, titleField.text,

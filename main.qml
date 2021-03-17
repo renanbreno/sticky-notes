@@ -13,10 +13,26 @@ ApplicationWindow {
     title: qsTr("Qt Dev.Academy")
     color: "#fafafa"
 
+    function setFilter(text) {
+        notesView.setFilter(text)
+    }
+
     RemoveNoteDialog {
         id: removeNoteDialog
         onAccepted: {
             dbNotes.deleteRow(note.id)
+        }
+    }
+
+    RemoveNoteDialog {
+        id:removeNotesDialog
+        onAccepted: {
+            console.log(JSON.stringify(note))
+            note.forEach((card) => {
+                                dbNotes.deleteRow(card.id)
+                                  }
+                                      )
+            notesView.clearSelected()
         }
     }
 
@@ -48,34 +64,9 @@ ApplicationWindow {
         id: dbNotes
     }
 
-    header: ToolBar {
-        RowLayout {
-            anchors {
-                fill: parent
-                rightMargin: 16
-                leftMargin: 16
-            }
-            ToolButton {
-                text: ' ⋮ '
-                font.pixelSize: 26
-                onClicked: {
-                    menu.open()
-                }
-            }
-
-            Item { Layout.fillWidth: true; }
-
-            TextField {
-                placeholderText: qsTr("Buscar uma nota")
-                id: searchNotes
-            }
-
-            Item { Layout.fillWidth: true; }
-            Label {
-                text: "Keep dev.academy"
-                elide: "ElideRight"
-            }
-        }
+    header: CustomToolbar {
+        id: searchNotes
+        onTextFieldChanged: setFilter(text)
     }
 
     StackView {
@@ -145,6 +136,7 @@ ApplicationWindow {
             Layout.fillHeight: true
             Layout.fillWidth: true
             NotesView {
+                id: notesView
                 anchors.fill: parent
                 model: dbNotes
 
@@ -156,9 +148,11 @@ ApplicationWindow {
                     removeNoteDialog.note = note
                     removeNoteDialog.open()
                 }
+                onRemoveAllButtonPressed: {
+                    removeNotesDialog.note = selectedCards
+                    removeNotesDialog.open()
+                }
             }
         }
     }
 }
-
-

@@ -1,4 +1,4 @@
-QT += quick sql svg xml
+QT += quick sql svg xml qml quickcontrols2
 
 CONFIG += c++11
 
