@@ -11,7 +11,7 @@ ApplicationWindow {
     height: 780
     visible: true
     title: qsTr("Qt Dev.Academy")
-    color: "#fafafa"
+    color: myModel.viewTheme == "darkTheme" ? "#050505" : "#fafafa"
 
     function setFilter(text) {
         notesView.setFilter(text)
@@ -81,6 +81,19 @@ ApplicationWindow {
                 anchors.fill: parent
                 horizontalAlignment: Image.AlignRight
                 fillMode: Image.PreserveAspectFit
+                anchors.margins: 12
+                source: "qrc:/icons/adicionar.png"
+            }
+            text: "Adicionar nota"
+            onPressed: {
+                addNotaDialog.open()
+            }
+        }
+        MenuItem {
+            Image {
+                anchors.fill: parent
+                horizontalAlignment: Image.AlignRight
+                fillMode: Image.PreserveAspectFit
                 anchors.margins: 16
                 source: myModel.viewState == "list" ? "qrc:/icons/grid.png" : "qrc:/icons/list.png"
             }
@@ -95,15 +108,12 @@ ApplicationWindow {
                 horizontalAlignment: Image.AlignRight
                 fillMode: Image.PreserveAspectFit
                 anchors.margins: 12
-                source: "qrc:/icons/adicionar.png"
+                source: myModel.viewTheme == "darkTheme" ? "qrc:/icons/sol.png" : "qrc:/icons/lua.png"
             }
-            text: "Adicionar nota"
+            text: myModel.viewTheme == "darkTheme" ? "Modo Claro" : "Modo Escuro"
             onPressed: {
-                addNotaDialog.open()
+                myModel.toggleViewTheme()
             }
-        }
-        MenuItem {
-            text: "Modo Escuro"
         }
     }
 
@@ -116,6 +126,7 @@ ApplicationWindow {
                 wrapMode: Text.Wrap
                 Layout.fillWidth: true
                 font.pixelSize: 18
+                color: myModel.viewTheme == "darkTheme" ? "white" : "black"
             }
             TextField {
                 id: nameField

@@ -24,7 +24,7 @@ ColumnLayout {
         if (text === "") {
             model.setFilter(text)
         }
-        model.setFilter(`title LIKE '%${text}%'`)
+        model.setFilter(`title LIKE '%${text}%' or author LIKE '%${text}%' or text LIKE '%${text}%'`)
     }
 
     function clearSelected() {
@@ -34,13 +34,16 @@ ColumnLayout {
 
     Text {
         text: "SELECIONADOS: " + (selectedCards.length)
+        color: myModel.viewTheme == "darkTheme" ? "white" : "black"
     }
 
     RowLayout {
         Button {
             id: remove
             enabled: selectedCards.length >= 1
+            flat: true
             text: "Remover seleção"
+            Material.foreground: myModel.viewTheme == "darkTheme" ? "white" : "black"
             onPressed: {
                 clearSelected()
             }
@@ -48,7 +51,9 @@ ColumnLayout {
         Button {
             id: deleteCard
             enabled: selectedCards.length >= 1
+            flat: true
             text: "Remover cards"
+            Material.foreground: "red"
             onPressed: {
                 root.removeAllButtonPressed(selectedCards)
             }
@@ -92,7 +97,7 @@ ColumnLayout {
                         Layout.preferredHeight: isGrid ? 200 : 60
                         Layout.maximumWidth: root.width / grid.columns
                         Layout.fillWidth: true
-                        color: model.color
+                        color: myModel.viewTheme == "darkTheme" ? Qt.darker(model.color, 2.8) : model.color
 
                         MouseArea {
                             id: mousearea
@@ -126,6 +131,7 @@ ColumnLayout {
                                     font { pixelSize: 20; weight: Font.bold }
                                     elide: Text.ElideRight
                                     text: model.title
+                                    color: myModel.viewTheme == "darkTheme" ? "white" : "black"
                                     anchors.fill: parent
                                 }
                             }
@@ -138,6 +144,7 @@ ColumnLayout {
                                     font.pixelSize: 18
                                     elide: Text.ElideRight
                                     text: model.author
+                                    color: myModel.viewTheme == "darkTheme" ? "white" : "black"
                                     anchors.fill: parent
                                 }
                             }
@@ -150,6 +157,7 @@ ColumnLayout {
                                     font.pixelSize: 14
                                     elide: Text.ElideRight
                                     text: model.text
+                                    color: myModel.viewTheme == "darkTheme" ? "white" : "black"
                                     wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                                     anchors.fill: parent
                                 }
@@ -177,8 +185,9 @@ ColumnLayout {
                                 visible: mousearea.containsMouse || cardCheckBox.hovered || card.checked
                                 implicitWidth: 26
                                 implicitHeight: implicitWidth
+                                border.width: 2
                                 border.color: "#888"
-                                color: "#ECD5E3"
+                                color: myModel.viewTheme == "darkTheme" ? Qt.darker(model.color, 4.0) : model.color
                                 radius: implicitWidth
                             }
 

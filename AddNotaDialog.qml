@@ -36,7 +36,8 @@ Dialog {
     }
 
     background: Rectangle {
-        color: cor
+        color: myModel.viewTheme == "darkTheme" ? Qt.darker(cor, 2.8) : cor
+        border.color: "#222222"
         border.width: 2
         radius: 6
         ColumnLayout {
@@ -66,7 +67,6 @@ Dialog {
                                 { name: "Rosa", color: "#FFCCB6" },
                                 { name: "Rosa claro", color: "#F3B0C3" },
                                 { name: "Azul Claro", color: "#C6DBDA" },
-                                { name: "Cor Padrão", color: "white"}
                             ]
 
                             RadioButton {
@@ -109,13 +109,14 @@ Dialog {
                     }
                     TextField {
                         id: dateField
+
                         Layout.fillWidth: true
                         text: new Date().toLocaleDateString(Qt.LocaleDate)
                     }
                     TextArea {
                         id: textField
                         Layout.fillWidth: true
-                        background: Rectangle { color: "black"; opacity: 0.2 }
+                        background: Rectangle { color: "black"; opacity: 0.1; radius: 2 }
                         placeholderText: "Texto"
                         wrapMode: "WrapAtWordBoundaryOrAnywhere"
                     }

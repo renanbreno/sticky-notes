@@ -4,12 +4,13 @@ import QtQuick.Window 2.12
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Material 2.3
 import QtQuick.Layouts 1.3
+import QtQuick.Controls.Styles 1.4
 
 import Models 1.0
 
 ToolBar {
     signal textFieldChanged(string text)
-
+    Material.primary: myModel.viewTheme == "darkTheme" ? "#222222" : Material.BlueGrey
     Timer {
         id: timer
         interval: 500
@@ -23,10 +24,14 @@ ToolBar {
             fill: parent
             rightMargin: 12; leftMargin: 12
         }
-        Label {
-            text: "keep.dev"
-            color: "white"
-            font.pixelSize: 24
+
+        ToolButton {
+            text: ' ⋮ '
+            Material.foreground: "white"
+            font.pixelSize: 26
+            onClicked: {
+                menu.open()
+            }
         }
 
         TextField {
@@ -56,13 +61,10 @@ ToolBar {
                 }
             }
         }
-
-        ToolButton {
-            text: ' ⋮ '
-            font.pixelSize: 26
-            onClicked: {
-                menu.open()
-            }
+        Label {
+            text: "keep.dev"
+            color: "white"
+            font.pixelSize: 24
         }
     }
 }

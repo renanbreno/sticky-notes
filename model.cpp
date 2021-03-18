@@ -66,6 +66,24 @@ void Model::toggleViewState()
     emit viewStateChanged();
 }
 
+QString Model::viewTheme()
+{
+    if (m_viewTheme == "") {
+        return getValue("tipoTheme", "darkMode");
+    } else {
+        return m_viewTheme;
+    }
+}
+void Model::toggleViewTheme()
+{
+    if (viewTheme() == "darkTheme") {
+        setValue("tipoTheme", "whiteTheme");
+    } else {
+        setValue("tipoTheme", "darkTheme");
+    }
+    emit viewThemeChanged();
+}
+
 bool Model::setValue(QString key, QString value)
 {
         QSqlQuery query(m_database->database());
