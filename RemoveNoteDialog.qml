@@ -6,7 +6,14 @@ Dialog {
     id: removeNoteDialog
     property var note
     standardButtons: Dialog.Ok | Dialog.Cancel
-    title: "Confirma a exclusão da nota?"
-    x: parent.width/2 - addNotaDialog.width/2
-    y: parent.height/2 - addNotaDialog.height/2
+    Text {
+        id: name
+        text: qsTr("Confirma a exclusão da nota?")
+        color: myModel.viewTheme == "darkTheme" ? "white" : "black"
+        font.pixelSize: 26
+    }
+    x: (parent.width - width) / 2
+    y: (parent.height - height) / 2
+    Material.background: myModel.viewTheme == "darkTheme" ? "#050505" : "#fafafa"
+
 }

@@ -130,6 +130,16 @@ ApplicationWindow {
             }
             TextField {
                 id: nameField
+                background: Item {
+                    implicitHeight: 40
+                    implicitWidth: 200
+                    Rectangle {
+                        color: myModel.viewTheme == "darkTheme" ? "white" : "black"
+                        height: 3
+                        width: parent.width
+                        anchors.bottom: parent.bottom
+                    }
+                }
             }
             Button {
                 text: "Salvar"

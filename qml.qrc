@@ -18,5 +18,6 @@
         <file>Login.qml</file>
         <file>icons/lua.png</file>
         <file>icons/sol.png</file>
+        <file>icons/lixo.png</file>
     </qresource>
 </RCC>

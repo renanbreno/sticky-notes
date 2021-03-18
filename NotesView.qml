@@ -32,33 +32,43 @@ ColumnLayout {
         root.selectedCardsChanged()
     }
 
-    Text {
-        text: "SELECIONADOS: " + (selectedCards.length)
-        color: myModel.viewTheme == "darkTheme" ? "white" : "black"
-    }
-
     RowLayout {
         Button {
             id: remove
-            enabled: selectedCards.length >= 1
+            visible: selectedCards.length >= 1
             flat: true
-            text: "Remover seleção"
-            Material.foreground: myModel.viewTheme == "darkTheme" ? "white" : "black"
+            Image {
+                id: imgRemove
+                anchors.fill: parent
+                source: "qrc:/icons/remove.png"
+                fillMode: Image.PreserveAspectFit
+            }
             onPressed: {
                 clearSelected()
             }
         }
+
+        Text {
+            text: "SELECIONADOS: " + (selectedCards.length)
+            color: myModel.viewTheme == "darkTheme" ? "white" : "black"
+        }
+
         Button {
             id: deleteCard
-            enabled: selectedCards.length >= 1
+            visible: selectedCards.length >= 1
             flat: true
-            text: "Remover cards"
-            Material.foreground: "red"
+            Image {
+                id: imgDelete
+                anchors.fill: parent
+                source: "qrc:/icons/lixo.png"
+                fillMode: Image.PreserveAspectFit
+            }
             onPressed: {
                 root.removeAllButtonPressed(selectedCards)
             }
         }
     }
+
     Flickable {
         id: flick
         clip: true
