@@ -12,5 +12,9 @@
         <file>icons/list.png</file>
         <file>icons/remove.png</file>
         <file>CustomToolbar.qml</file>
+        <file>icons/close.png</file>
+        <file>icons/cancel.png</file>
+        <file>icons/cross.png</file>
+        <file>login.qml</file>
     </qresource>
 </RCC>

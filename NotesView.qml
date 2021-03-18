@@ -72,7 +72,7 @@ ColumnLayout {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 columns: isGrid ? parent.width / 200 : 1
-                Layout.rightMargin: 16; Layout.leftMargin: 16
+                Layout.rightMargin: 8; Layout.leftMargin: 8
 
                 Repeater {
                     id: repeater
@@ -173,24 +173,27 @@ ColumnLayout {
                         RoundButton {
                             id: cardCheckBox
                             property var selected: false
+                            background: Rectangle {
+                                visible: mousearea.containsMouse || cardCheckBox.hovered || card.checked
+                                implicitWidth: 26
+                                implicitHeight: implicitWidth
+                                border.color: "#888"
+                                color: "#ECD5E3"
+                                radius: implicitWidth
+                            }
 
-                            visible: mousearea.containsMouse || cardCheckBox.hovered || card.checked
-                            Material.background: selected ? "red" : "black"
                             anchors {
                                 top: parent.top
                                 right: parent.right
-                                margins: -20
+                                margins: -14
                             }
+
                             onPressed: {
                                 if (selected) {
                                     selectedCards.splice(selectedCards.indexOf(index), 1)
-                                    print("desmarcou")
-                                    print(selectedCards)
                                     selected = false
                                 } else {
                                     selectedCards.push({index: index, id: model.id, title: model.title})
-                                    print("marcou")
-                                    print(selectedCards)
                                     selected = true
                                 }
                                 root.selectedCardsChanged()

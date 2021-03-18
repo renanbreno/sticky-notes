@@ -112,7 +112,7 @@ ApplicationWindow {
         RowLayout {
             Layout.fillWidth: true
             Text {
-                text: `Notas do ${myModel.name}`
+                text: `Bem vindo, ${myModel.name}`
                 wrapMode: Text.Wrap
                 Layout.fillWidth: true
                 font.pixelSize: 18

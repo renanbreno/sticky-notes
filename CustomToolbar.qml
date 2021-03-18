@@ -21,9 +21,42 @@ ToolBar {
     RowLayout {
         anchors {
             fill: parent
-            rightMargin: 16
-            leftMargin: 16
+            rightMargin: 12; leftMargin: 12
         }
+        Label {
+            text: "keep.dev"
+            color: "white"
+            font.pixelSize: 24
+        }
+
+        TextField {
+            id: search
+            placeholderText: qsTr("Buscar uma nota")
+            placeholderTextColor: "white"
+            horizontalAlignment: Qt.AlignHCenter
+            verticalAlignment: Qt.AlignVCenter
+            Layout.fillWidth: true
+            onTextChanged: { timer.stop(); timer.start() }
+            Image {
+                anchors {
+                    right: parent.right; bottom: parent.bottom
+                    bottomMargin: 15
+                }
+                fillMode: Image.PreserveAspectFit
+                smooth: true; visible: search.text
+                source: "qrc:/icons/cross.png"
+
+                MouseArea {
+                    id: clear
+                    anchors { horizontalCenter: parent.horizontalCenter; verticalCenter: parent.verticalCenter }
+                    height: search.height; width: search.height
+                    onClicked: {
+                        search.text = ""
+                    }
+                }
+            }
+        }
+
         ToolButton {
             text: ' ⋮ '
             font.pixelSize: 26
@@ -31,18 +64,6 @@ ToolBar {
                 menu.open()
             }
         }
-
-        Item { Layout.fillWidth: true; }
-
-        TextField {
-            id: search
-            placeholderText: qsTr("Buscar uma nota")
-            onTextChanged: { timer.stop(); timer.start() }
-        }
-
-        Item { Layout.fillWidth: true; }
-        Label {
-            text: "Keep dev.academy"
-        }
     }
 }
+
