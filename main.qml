@@ -7,6 +7,7 @@ import QtQuick.Layouts 1.3
 import Models 1.0
 
 ApplicationWindow {
+    id: root
     width: 1024
     height: 780
     visible: true
@@ -81,19 +82,6 @@ ApplicationWindow {
                 anchors.fill: parent
                 horizontalAlignment: Image.AlignRight
                 fillMode: Image.PreserveAspectFit
-                anchors.margins: 12
-                source: "qrc:/icons/adicionar.png"
-            }
-            text: "Adicionar nota"
-            onPressed: {
-                addNotaDialog.open()
-            }
-        }
-        MenuItem {
-            Image {
-                anchors.fill: parent
-                horizontalAlignment: Image.AlignRight
-                fillMode: Image.PreserveAspectFit
                 anchors.margins: 16
                 source: myModel.viewState == "list" ? "qrc:/icons/grid.png" : "qrc:/icons/list.png"
             }
@@ -128,29 +116,30 @@ ApplicationWindow {
                 font.pixelSize: 18
                 color: myModel.viewTheme == "darkTheme" ? "white" : "black"
             }
-            TextField {
-                id: nameField
-                background: Item {
-                    implicitHeight: 40
-                    implicitWidth: 200
-                    Rectangle {
-                        color: myModel.viewTheme == "darkTheme" ? "white" : "black"
-                        height: 3
-                        width: parent.width
-                        anchors.bottom: parent.bottom
-                    }
-                }
-            }
-            Button {
-                text: "Salvar"
-                enabled: nameField != ""
-                onPressed: {
-                    if(nameField !== "") {
-                        myModel.setName(nameField.text, myModel.id)
-                    }
-                    nameField.clear()
-                }
-            }
+//            TextField {
+//                id: nameField
+//                color: myModel.viewTheme == "darkTheme" ? "white" : "black"
+//                background: Item {
+//                    implicitHeight: 40
+//                    implicitWidth: 200
+//                    Rectangle {
+//                        color: myModel.viewTheme == "darkTheme" ? "white" : "black"
+//                        height: 2
+//                        width: parent.width
+//                        anchors.bottom: parent.bottom
+//                    }
+//                }
+//            }
+//            Button {
+//                text: "Salvar"
+//                enabled: nameField != ""
+//                onPressed: {
+//                    if(nameField !== "") {
+//                        myModel.setName(nameField.text, myModel.id)
+//                    }
+//                    nameField.clear()
+//                }
+//            }
         }
 
         Item {

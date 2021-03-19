@@ -20,6 +20,7 @@ ToolBar {
     }
 
     RowLayout {
+        id: toolbar
         anchors {
             fill: parent
             rightMargin: 12; leftMargin: 12
@@ -64,7 +65,8 @@ ToolBar {
         Label {
             text: "keep.dev"
             color: "white"
-            font.pixelSize: 24
+            font.pixelSize: 20
+            visible: root.width < root.height ? false : true
         }
     }
 }

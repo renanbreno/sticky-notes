@@ -19,5 +19,7 @@
         <file>icons/lua.png</file>
         <file>icons/sol.png</file>
         <file>icons/lixo.png</file>
+        <file>icons/btnadicionar.png</file>
+        <file>icons/botao-adicionar.png</file>
     </qresource>
 </RCC>

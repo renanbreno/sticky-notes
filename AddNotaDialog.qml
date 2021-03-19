@@ -75,7 +75,7 @@ Dialog {
                                     height: 32
                                     width: height
                                     radius: height
-                                    color: modelData.color
+                                    color: myModel.viewTheme == "darkTheme" ? Qt.darker(modelData.color, 2.8) : modelData.color
                                     border.width: 2
                                 }
 
@@ -84,7 +84,7 @@ Dialog {
                                     height: 12
                                     width: height
                                     radius: height
-                                    color: parent.checked ? "black" : modelData.color
+                                    color: parent.checked ? "black" : rec.color
                                     anchors.centerIn: rec
                                 }
 
@@ -109,7 +109,6 @@ Dialog {
                     }
                     TextField {
                         id: dateField
-
                         Layout.fillWidth: true
                         text: new Date().toLocaleDateString(Qt.LocaleDate)
                     }
@@ -144,6 +143,7 @@ Dialog {
                               && !dateField.text == "")
 
                     onPressed: {
+                        if (!cor) { cor = "white" }
                         okPressed(noteId, titleField.text,
                                   authorField.text,
                                   textField.text,

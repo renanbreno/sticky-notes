@@ -32,6 +32,18 @@ ColumnLayout {
         root.selectedCardsChanged()
     }
 
+    RoundButton {
+        z: 1
+        anchors { right: parent.right; bottom: parent.bottom; rightMargin: 6; bottomMargin: 10 }
+        Image {
+            source: "qrc:/icons/adicionar.png"
+            fillMode: Image.PreserveAspectFit
+        }
+        onPressed: {
+            addNotaDialog.open()
+        }
+    }
+
     RowLayout {
         Button {
             id: remove
