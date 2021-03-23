@@ -45,14 +45,21 @@ ColumnLayout {
     }
 
     RowLayout {
+        Layout.alignment: Qt.AlignCenter
+        spacing: 26
         Button {
             id: remove
             visible: selectedCards.length >= 1
             flat: true
+            background: Rectangle {
+                implicitHeight: 40
+                implicitWidth: implicitHeight
+                radius: implicitHeight
+            }
             Image {
                 id: imgRemove
                 anchors.fill: parent
-                source: "qrc:/icons/remove.png"
+                source: "qrc:/icons/cancel.png"
                 fillMode: Image.PreserveAspectFit
             }
             onPressed: {
@@ -69,12 +76,19 @@ ColumnLayout {
             id: deleteCard
             visible: selectedCards.length >= 1
             flat: true
-            Image {
-                id: imgDelete
-                anchors.fill: parent
-                source: "qrc:/icons/lixo.png"
-                fillMode: Image.PreserveAspectFit
+            background: Rectangle {
+                implicitHeight: 40
+                implicitWidth: implicitHeight
+                radius: implicitHeight
+                Image {
+                    id: imgDelete
+                    anchors.fill: parent
+                    source: "qrc:/icons/remover.png"
+                    fillMode: Image.PreserveAspectFit
+                }
             }
+
+
             onPressed: {
                 root.removeAllButtonPressed(selectedCards)
             }
@@ -108,14 +122,27 @@ ColumnLayout {
                         property alias checkBox: cardCheckBox
                         property var checked: {
                             const cards = root.selectedCards.filter((cardItem) => {
-                                                                         return cardItem.index == index
-                                                                     })
+                                                                        return cardItem.index == index
+                                                                    })
                             let result = cards.length > 0
                             if (!result) {
                                 checkBox.selected = false
                             }
                             return result
                         }
+
+//                        property GridLayout customerSales: GridLayout {
+//                            property real total: 0
+//                            property var internalModel: []
+//                            function orderFilter(filter) {
+//                                if (filter === "") {
+//                                    clear()
+//                                    internalModel.sort((a, b) => (a.model.date < b.model.date) ? 1 : -1).forEach(item => {
+//                                                      customerSales.append(item)
+//                                                  })
+//                                }
+//                            }
+//                        }
                         Layout.preferredHeight: isGrid ? 200 : 60
                         Layout.maximumWidth: root.width / grid.columns
                         Layout.fillWidth: true
@@ -174,14 +201,15 @@ ColumnLayout {
                             Item {
                                 Layout.fillHeight: true
                                 Layout.fillWidth: true
-                                Layout.alignment: Qt.AlignVCenter
                                 Text {
-                                    font.pixelSize: 14
+                                    font.pixelSize: 18
                                     elide: Text.ElideRight
                                     text: model.text
                                     color: myModel.viewTheme == "darkTheme" ? "white" : "black"
                                     wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-                                    anchors.fill: parent
+                                    anchors {
+                                        fill: parent
+                                        topMargin: isGrid ? 0 : 11 }
                                 }
                             }
 

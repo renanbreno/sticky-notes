@@ -36,6 +36,7 @@ Dialog {
     }
 
     background: Rectangle {
+        id: backgroundRectangle
         color: myModel.viewTheme == "darkTheme" ? Qt.darker(cor, 2.8) : cor
         border.color: "#222222"
         border.width: 2
@@ -59,6 +60,7 @@ Dialog {
                         Layout.alignment: Qt.AlignCenter
                         ButtonGroup { id: buttonGroup }
                         columns: 10
+
                         Repeater {
                             model: [
                                 { name: "Azul", color: "#ABDEE6" },
@@ -67,6 +69,7 @@ Dialog {
                                 { name: "Rosa", color: "#FFCCB6" },
                                 { name: "Rosa claro", color: "#F3B0C3" },
                                 { name: "Azul Claro", color: "#C6DBDA" },
+                                { name: "Branco", color: "#fafafa" },
                             ]
 
                             RadioButton {
@@ -88,7 +91,6 @@ Dialog {
                                     anchors.centerIn: rec
                                 }
 
-                                id: colorField
                                 checked: modelData.color == cor
                                 ButtonGroup.group: buttonGroup
                                 onClicked: {
@@ -101,33 +103,37 @@ Dialog {
                         id: titleField
                         Layout.fillWidth: true
                         placeholderText: "Título"
+                        color: myModel.viewTheme == "darkTheme" ? "white" : "black"
                     }
                     TextField {
                         id: authorField
                         Layout.fillWidth: true
                         placeholderText: "Autor"
+                        color: myModel.viewTheme == "darkTheme" ? "white" : "black"
                     }
                     TextField {
                         id: dateField
                         Layout.fillWidth: true
                         text: new Date().toLocaleDateString(Qt.LocaleDate)
+                        color: myModel.viewTheme == "darkTheme" ? "white" : "black"
                     }
                     TextArea {
                         id: textField
                         Layout.fillWidth: true
                         background: Rectangle { color: "black"; opacity: 0.1; radius: 2 }
                         placeholderText: "Texto"
+                        color: myModel.viewTheme == "darkTheme" ? "white" : "black"
                         wrapMode: "WrapAtWordBoundaryOrAnywhere"
                     }
                 }
             }
             RowLayout {
                 Layout.alignment: Qt.AlignCenter
-                spacing: 6
+                spacing: 16
                 Button {
                     text: "Cancelar"
-                    flat: true
-                    Material.foreground: "#C62828"
+                    Material.background: "#fafafa"
+                    Material.foreground: "#050505"
                     onPressed: {
                         cancelPressed()
                     }
@@ -135,15 +141,14 @@ Dialog {
                 Button {
                     x: 91
                     text: "Salvar"
-                    flat: true
-                    Material.foreground: "#146d99"
+                    Material.background: Material.Blue
+                    Material.foreground: "#050505"
                     enabled: (!titleField.text == ""
                               && !authorField.text == ""
                               && !textField.text == ""
                               && !dateField.text == "")
 
                     onPressed: {
-                        if (!cor) { cor = "white" }
                         okPressed(noteId, titleField.text,
                                   authorField.text,
                                   textField.text,

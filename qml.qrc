@@ -7,19 +7,14 @@
         <file>AddNotaDialog.qml</file>
         <file>NotesView.qml</file>
         <file>icons/adicionar.png</file>
-        <file>icons/remover.png</file>
         <file>icons/grid.png</file>
         <file>icons/list.png</file>
-        <file>icons/remove.png</file>
         <file>CustomToolbar.qml</file>
-        <file>icons/close.png</file>
-        <file>icons/cancel.png</file>
         <file>icons/cross.png</file>
         <file>Login.qml</file>
         <file>icons/lua.png</file>
         <file>icons/sol.png</file>
-        <file>icons/lixo.png</file>
-        <file>icons/btnadicionar.png</file>
-        <file>icons/botao-adicionar.png</file>
+        <file>icons/remover.png</file>
+        <file>icons/cancel.png</file>
     </qresource>
 </RCC>
