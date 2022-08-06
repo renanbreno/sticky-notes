@@ -2,9 +2,6 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>qtquickcontrols2.conf</file>
-        <file>Card.qml</file>
-        <file>RemoveNoteDialog.qml</file>
-        <file>AddNotaDialog.qml</file>
         <file>NotesView.qml</file>
         <file>icons/adicionar.png</file>
         <file>icons/grid.png</file>
@@ -16,5 +13,10 @@
         <file>icons/sol.png</file>
         <file>icons/remover.png</file>
         <file>icons/cancel.png</file>
+    </qresource>
+    <qresource prefix="/componentes">
+        <file alias="AddNotaDialog.qml">componentes/AddNotaDialog.qml</file>
+        <file alias="Card.qml">componentes/Card.qml</file>
+        <file alias="RemoveNoteDialog.qml">componentes/RemoveNoteDialog.qml</file>
     </qresource>
 </RCC>

@@ -3,8 +3,8 @@ import QtQuick.Window 2.12
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Material 2.3
 import QtQuick.Layouts 1.3
-
 import Models 1.0
+import "qrc:/componentes"
 
 ColumnLayout {
     id: root
@@ -131,18 +131,6 @@ ColumnLayout {
                             return result
                         }
 
-//                        property GridLayout customerSales: GridLayout {
-//                            property real total: 0
-//                            property var internalModel: []
-//                            function orderFilter(filter) {
-//                                if (filter === "") {
-//                                    clear()
-//                                    internalModel.sort((a, b) => (a.model.date < b.model.date) ? 1 : -1).forEach(item => {
-//                                                      customerSales.append(item)
-//                                                  })
-//                                }
-//                            }
-//                        }
                         Layout.preferredHeight: isGrid ? 200 : 60
                         Layout.maximumWidth: root.width / grid.columns
                         Layout.fillWidth: true
