@@ -11,7 +11,7 @@ Item {
         id: rect
         anchors.fill: parent
         color: "white"
-        radius: 4
+        radius: 41
         layer.enabled: cardItem.elevation > 0
         layer.effect: ElevationEffect {
             elevation: cardItem.elevation
