@@ -17,7 +17,7 @@ bool Database::openDatabase()
     qDebug() << dataDir.absolutePath();
     QString dbPath = dataDir.absolutePath() + "/" + DB_CONNECTION_NAME + ".db3";
 
-    if(!isConnected()) {
+    if (!isConnected()) {
         m_db = QSqlDatabase::addDatabase("QSQLITE", DB_CONNECTION_NAME);
     } else {
         m_db = QSqlDatabase::database(DB_CONNECTION_NAME);
@@ -54,16 +54,15 @@ bool Database::runSqlScript(QSqlDatabase db, QString path)
 {
     QFile scriptFile(path);
     bool allQueriesOk = false;
-    if(scriptFile.exists() && db.isOpen() && db.isValid()) {
-        if(scriptFile.open(QIODevice::ReadOnly)) {
+    if (scriptFile.exists() && db.isOpen() && db.isValid()) {
+        if (scriptFile.open(QIODevice::ReadOnly)) {
             QStringList queries = QTextStream(&scriptFile).readAll().split(";");
 
-            for (QString query : queries) {
-                if(query.trimmed().isEmpty()) {
+            for (const QString &query : qAsConst(queries)) {
+                if (query.trimmed().isEmpty()) {
                     continue;
                 }
-                if(db.exec(query.trimmed()).lastError().isValid()) {
-                   qDebug() << "tu se lascou";
+                if (db.exec(query.trimmed()).lastError().isValid()) {
                    qDebug() << query << "falhou";
                    allQueriesOk = false;
                 } else {
